@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="BetitChalengeApp" ng-strict-di >
+<head>
+	<title>Online Mindmap</title>
+	<link rel="icon" href="/images/favicon.ico">
+	<link type="text/css" rel="stylesheet" media=all href="/styles/main.css" />
+
+	<script src="scripts/ext/zone.js"></script>
+    <script src="scripts/ext/Reflect.js"></script>
+	<script src="scripts/ext/system.js"></script>
+	
+	<script src="scripts/system.config.js"></script>
+	<script>
+		System.import('omm').catch(function(err){ console.error(err); });
+	</script>
+</head>
+
+<body>
+	<omm></omm>
+</body>
+</html>
