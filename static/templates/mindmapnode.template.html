@@ -1,4 +1,4 @@
-<div>
-	{{node.text}}
-	<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>
-</div>
+<span (click)="onInputClick()" *ngIf="!editing">{{node.text}}</span>
+<input *ngIf="editing" type="text" id="text" required [(ngModel)]="edited_text" >
+<button (click)="onAddButtonClick()">+</button>
+<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>

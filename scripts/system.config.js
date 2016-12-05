@@ -17,11 +17,11 @@
       '@angular/core': 'ext:angular.core.js',
       '@angular/common': 'ext:angular.common.js',
       '@angular/compiler': 'ext:angular.compiler.js',
+      '@angular/forms': 'ext:angular.forms.js',
       '@angular/platform-browser': 'ext:angular.platform-browser.js',
       '@angular/platform-browser-dynamic': 'ext:angular.platform-browser-dynamic.js',
-      '@angular/http': 'ext:angular.http.js',
-      '@angular/router': 'ext:angular.router.js',
-      '@angular/forms': 'ext:angular.forms.js',
+//      '@angular/http': 'ext:angular.http.js',
+//      '@angular/router': 'ext:angular.router.js',
 
       // other libraries
       'rxjs':                      'ext:rxjs',

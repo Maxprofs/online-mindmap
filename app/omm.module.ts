@@ -1,18 +1,21 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }	 from '@angular/forms';
 
 import { OmmComponent }  from './omm.component';
 import { MindMapComponent }  from './mindmap.component';
-import { MindMapNodeComponent }  from './mindmapnode.component';
+import { MindMapNodeComponent, MindMapNodeInput }  from './mindmapnode.component';
 
 @NgModule({
 	imports: [
-		BrowserModule
+		BrowserModule,
+		FormsModule
 	],
 	declarations: [ 
 		OmmComponent,
 		MindMapComponent,
-		MindMapNodeComponent
+		MindMapNodeComponent,
+		MindMapNodeInput
 	],
 //	providers: [
 //	],

@@ -11,9 +11,9 @@ export class MindMapNode {
 	style: any;
 	subNodes: MindMapNode[];
 
-	constructor( id?: string ) {
+	constructor( text?: string, id?: string ) {
 		this.id = id ? id : Utils.newGuid();
-		this.text = "";
+		this.text = text ? text : "";
 		this.rel_x = 0;
 		this.rel_y = 0;
 		this.style = DEFAULT_STYLE;
