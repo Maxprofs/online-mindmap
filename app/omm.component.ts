@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'omm',
-  template: '<h1>Hello {{name}}</h1>',
+  templateUrl: './templates/omm.template.html'
 })
 
-export class OmmComponent  { name = 'Angular'; }
+export class OmmComponent  {}

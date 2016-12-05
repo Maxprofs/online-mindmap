@@ -1,0 +1,4 @@
+<div>
+	{{node.text}}
+	<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>
+</div>
