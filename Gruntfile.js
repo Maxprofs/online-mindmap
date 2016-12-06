@@ -31,6 +31,9 @@ module.exports = function(grunt) {
 		src: 'node_modules/@angular/compiler/bundles/compiler.umd.min.js',
 		dest: 'static/scripts/ext/angular.compiler.js',
 	},{
+		src: 'node_modules/@angular/forms/bundles/forms.umd.min.js',
+		dest: 'static/scripts/ext/angular.forms.js',
+	},{
 		src: 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.min.js',
 		dest: 'static/scripts/ext/angular.platform-browser.js',
 	},{
