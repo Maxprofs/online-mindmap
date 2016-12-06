@@ -1,0 +1,5 @@
+.sass-cache/
+node_modules/
+static/fonts/
+static/scripts/
+static/styles/

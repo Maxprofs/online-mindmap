@@ -14,6 +14,7 @@ import { MindMapNodeComponent, MindMapNodeInput }  from './mindmapnode.component
 	],
 	declarations: [ 
 		OmmComponent,
+		MainMenuComponent,
 		MindMapComponent,
 		MindMapNodeComponent,
 		MindMapNodeInput
