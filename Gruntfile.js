@@ -14,7 +14,14 @@ module.exports = function(grunt) {
 		dest: 'static/scripts/'
 	}];
 
-	var ext_files = [{
+	var css_source_files = [{
+		expand: true,
+		src: ['styles/**/*.css'],
+		dest: 'static/styles/',
+		flatten: true
+	}];
+
+	var angular_files = [{
 		src: 'node_modules/@angular/common/bundles/common.umd.min.js',
 		dest: 'static/scripts/ext/angular.common.js',
 	},{
@@ -45,6 +52,16 @@ module.exports = function(grunt) {
 		dest: 'static/scripts/ext/rxjs/'
 	}];
 
+	var fontawesome_files = [{
+		expand: true,
+		cwd: 'node_modules/font-awesome/fonts',
+		src: ['**/*.*'],
+		dest: 'static/fonts/'
+	},{
+		src: 'node_modules/font-awesome/css/font-awesome.min.css',
+		dest: 'static/styles/font-awesome.css'
+	}];
+
 	grunt.initConfig({
 		exec: {
 			tsc: {
@@ -54,36 +71,57 @@ module.exports = function(grunt) {
 		
 		copy: {
 			scripts: { files: scripts_files },
+			css: { files: css_source_files },
 			app: { files: app_files	},
-			ext: { files: ext_files	}
+			angular: { files: angular_files	},
+			fontawesome: {files: fontawesome_files }
 		},
 
 		clean: {
 			init: ['static/scripts'],
 			end: ['app/**/*.js','app/**/*.js.map']
-		}
+		},
+
+		sass: {
+			all: {
+				files: [{
+					expand: true,
+					src: ['styles/*.scss'],
+					dest: 'static/styles/',
+					ext: '.css',
+					flatten: true
+				}]
+			}
+		},
 	});
 
 	// Load plugins
 	grunt.loadNpmTasks('grunt-exec');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('debug', [
 		'clean:init',
 		'exec:tsc',
+		'sass:all',
 		'copy:scripts',
+		'copy:css',
 		'copy:app',
-		'copy:ext',
+		'copy:angular',
+		'copy:fontawesome',
 		'clean:end'
 	]);
 
 	grunt.registerTask('release', [
 		'clean:init',
 		'exec:tsc',
+		'sass:all',
 		'copy:scripts',
+		'copy:css',
 		'copy:app',
-		'copy:ext',
+		'copy:angular',
+		'copy:fontawesome',
 		'clean:end'
 	]);
 };

@@ -10,6 +10,7 @@
     "@angular/platform-browser": "^2.2.4",
     "@angular/platform-browser-dynamic": "^2.2.4",
     "express": "^4.14.0",
+    "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome.git",
     "reflect-metadata": "^0.1.8",
     "requirejs": "^2.3.2",
     "rxjs": "^5.0.0-rc.4",
@@ -20,6 +21,7 @@
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
     "grunt-exec": "^1.0.1",
     "typescript": "^2.0.10"
   },

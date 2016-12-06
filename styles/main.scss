@@ -1,0 +1,17 @@
+html, body {
+	height: 100%;
+}
+
+omm {
+	height: 100%;
+
+	#ommBox {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+
+		main-menu {
+		    background-color: #71c1fd;
+		}
+	}
+}
