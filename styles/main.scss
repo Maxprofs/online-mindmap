@@ -1,17 +1,60 @@
 html, body {
 	height: 100%;
+	font-family: Helvetica;
+	font-size: 14px;
 }
 
 omm {
+	display: flex;
+	flex-direction: row;
 	height: 100%;
+}
 
-	#ommBox {
+main-menu {
+	background-color: #71c1fd;
+
+	#menu-head {
+		h1 {
+			margin-right: 0.5em;
+		}
+
 		display: flex;
 		flex-direction: row;
-		height: 100%;
+		white-space: nowrap;
+		padding: 0.5em;
+	}
+}
 
-		main-menu {
-		    background-color: #71c1fd;
+mind-map {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+mind-map-node {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 0 auto;
+
+	.node {
+		padding: 0.5em;
+		
+		flex-shrink: 0;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		.node-text {
+			margin-left: 0.5em;
+			margin-right: 0.5em;
 		}
+	}
+
+	.subnodes {
 	}
 }

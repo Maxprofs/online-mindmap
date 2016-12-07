@@ -18,14 +18,6 @@ export class MindMapNodeInput {
 	ngOnInit() {
     	this.renderer.invokeElementMethod(this.elementRef.nativeElement, 'focus', []);
   	}
-
-	@HostListener('blur')
-	onBlur() {
-		this.renderer.invokeElementMethod(
-			this.elementRef.nativeElement, 
-        	'dispatchEvent', 
-        	[new CustomEvent('input-blur', { bubbles: true })]);
-	};
 }
 
 @Component({
@@ -38,6 +30,13 @@ export class MindMapNodeComponent {
 	edited_text: string;
 	editing: boolean = false
 
+	updateText() {
+		if( this.editing ) {
+			this.node.text = this.edited_text;
+			this.editing = false;
+		}		
+	}
+
 	onInputClick() {
 		if( this.node ) {
 			this.edited_text = this.node.text;
@@ -45,15 +44,26 @@ export class MindMapNodeComponent {
 		}
 	}
 
-	@HostListener('input-blur')
 	onInputBlur() {
-		if( this.editing ) {
-			this.node.text = this.edited_text;
-			this.editing = false;
-		}		
+		this.updateText();
+	}
+
+	onInputEnter() {
+		this.updateText();
 	}
 
 	onAddButtonClick() {
-		this.node.add( new MindMapNode("New Node") );
+		if( this.node )
+			this.node.add( new MindMapNode("New Node") );
+	}
+
+	onAddSiblingButtonClick() {
+		if( this.node && this.node.parent )
+			this.node.parent.addBefore( this.node, new MindMapNode("New Node") );
+	}
+
+	onRemoveButtonClick() {
+		if( this.node && this.node.parent )
+			this.node.parent.remove( this.node );
 	}
 }

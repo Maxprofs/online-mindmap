@@ -1,4 +1,14 @@
-<span (click)="onInputClick()" *ngIf="!editing">{{node.text}}</span>
-<input *ngIf="editing" type="text" id="text" required [(ngModel)]="edited_text" >
-<button (click)="onAddButtonClick()">+</button>
-<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>
+<div class="node" >
+	<div class="node-content">
+		<span (click)="onInputClick()" *ngIf="!editing" class="node-text">
+			{{node.text}}
+		</span>
+		<i *ngIf="!editing" (click)="onAddButtonClick()" class="fa fa-fw fa-plus" aria-hidden="true"></i>
+		<i *ngIf="!editing && node.parent" (click)="onAddSiblingButtonClick()" class="fa fa-fw fa-long-arrow-down" aria-hidden="true"></i>
+		<i *ngIf="!editing && node.parent" (click)="onRemoveButtonClick()" class="fa fa-fw fa-trash" aria-hidden="true"></i>
+		<input *ngIf="editing" (keyup.enter)="onInputEnter()" (blur)="onInputBlur()" type="text" id="text" required [(ngModel)]="edited_text" >
+	</div>
+</div>
+<div class="subnodes" >
+	<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>
+</div>

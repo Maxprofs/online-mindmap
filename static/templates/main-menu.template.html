@@ -1,6 +1,4 @@
-<div id=mainMenuBox >
-	<h1 >
-		<span *ngIf="open">Main Menu</span>
-		<i (click)="switchMenu()" class="fa fa-bars fa-fw" aria-hidden="true"></i>
-	</h1>
+<div id=menu-head>
+	<h1 *ngIf="open">Main Menu</h1>
+	<i (click)="switchMenu()" class="fa fa-bars" aria-hidden="true"></i>
 </div>
