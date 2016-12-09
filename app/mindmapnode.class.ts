@@ -27,10 +27,20 @@ export class MindMapNode {
 		node.parent = this;
 	}
 
-	addBefore( node: MindMapNode, sibling: MindMapNode ): void {
+	addAfter( node: MindMapNode, sibling: MindMapNode ): void {
 		for( let index in this.subNodes ) {
 			if( node.id === this.subNodes[index].id ) {
 				this.subNodes.splice( Number(index)+1, 0, sibling );
+				sibling.parent = this;
+				break;
+			}
+		}
+	}
+
+	addBefore( node: MindMapNode, sibling: MindMapNode ): void {
+		for( let index in this.subNodes ) {
+			if( node.id === this.subNodes[index].id ) {
+				this.subNodes.splice( Number(index), 0, sibling );
 				sibling.parent = this;
 				break;
 			}

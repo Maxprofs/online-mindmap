@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 
 import { MindMapService } from './mindmap.service'
 import { MindMap } from './mindmap.class'
+import { MindMapNode } from './mindmapnode.class'
 
 @Component({
 	selector: 'mind-map',
@@ -12,10 +13,14 @@ import { MindMap } from './mindmap.class'
 
 export class MindMapComponent implements OnInit {
 	mindMap: MindMap;
+	selected: MindMapNode;
 
 	constructor( private mindMapService: MindMapService ) {};
 
 	ngOnInit(): void {
-		this.mindMapService.getMindMap().then( mindMap => this.mindMap = mindMap );
+		this.mindMapService.getMindMap().then( mindMap => { 
+			this.mindMap = mindMap; 
+			this.selected = mindMap;
+		} );
 	}
 }

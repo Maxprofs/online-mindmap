@@ -29,12 +29,41 @@ export class MindMapNodeComponent {
 	
 	edited_text: string;
 	editing: boolean = false
+	show_buttons: boolean = false;
 
-	updateText() {
+	private updateText() {
 		if( this.editing ) {
 			this.node.text = this.edited_text;
 			this.editing = false;
 		}		
+	}
+
+	add() {
+		if( this.node )
+			this.node.add( new MindMapNode("New Node") );
+	}
+
+	addBefore() {
+		if( this.node && this.node.parent )
+			this.node.parent.addBefore( this.node, new MindMapNode("New Node") );
+	}
+
+	addAfter() {
+		if( this.node && this.node.parent )
+			this.node.parent.addAfter( this.node, new MindMapNode("New Node") );
+	}
+
+	remove() {
+		if( this.node && this.node.parent )
+			this.node.parent.remove( this.node );
+	}
+
+	showButtons() {
+		this.show_buttons = true;
+	}
+
+	hideButtons() {
+		this.show_buttons = false;
 	}
 
 	onInputClick() {
@@ -44,26 +73,21 @@ export class MindMapNodeComponent {
 		}
 	}
 
+	@HostListener('keyup.up')
+	onKeyUp() {
+		this.addBefore();
+	}
+
+	@HostListener('keyup.down')
+	onKeyDown() {
+		this.addAfter()
+	}
+
 	onInputBlur() {
 		this.updateText();
 	}
 
 	onInputEnter() {
 		this.updateText();
-	}
-
-	onAddButtonClick() {
-		if( this.node )
-			this.node.add( new MindMapNode("New Node") );
-	}
-
-	onAddSiblingButtonClick() {
-		if( this.node && this.node.parent )
-			this.node.parent.addBefore( this.node, new MindMapNode("New Node") );
-	}
-
-	onRemoveButtonClick() {
-		if( this.node && this.node.parent )
-			this.node.parent.remove( this.node );
 	}
 }
