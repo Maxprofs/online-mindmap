@@ -1,3 +1,6 @@
+<div class="left-subnodes" >
+	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Left" [node]="subnode"></mind-map-node>
+</div>
 <div class="node" (mouseover)="showButtons()" (mouseleave)="hideButtons()" >
 	<div class="node-content" >
 		<span (click)="onInputClick()" *ngIf="!editing" class="node-text">
@@ -5,15 +8,32 @@
 		</span>
 		<input *ngIf="editing" (keyup.enter)="onInputEnter()" (blur)="onInputBlur()" type="text" id="text" required [(ngModel)]="edited_text" >
 	</div>
-	<div *ngIf="show_buttons && !editing" class="node-buttons">
+	<div *ngIf="show_buttons && !isRoot() && !editing" class="node-buttons">
+		<div class="node-buttons-block">
+			<i (click)="addBefore()" class="fa fa-fw fa-long-arrow-up node-button" aria-hidden="true"></i>
+			<i (click)="addAfter()" class="fa fa-fw fa-long-arrow-down node-button" aria-hidden="true"></i>
+			<i (click)="remove()" class="fa fa-fw fa-trash node-button" aria-hidden="true"></i>
+		</div>
+	</div>
+	
+	<div *ngIf="!isRoot() && show_buttons && !editing" [ngClass]="{'left-node-buttons': node.left(),
+		'right-node-buttons': node.right()}">
 		<div class="node-buttons-block">
 			<i (click)="add()" class="fa fa-fw fa-plus node-button" aria-hidden="true"></i>
-			<i *ngIf="node.parent" (click)="addBefore()" class="fa fa-fw fa-long-arrow-up node-button" aria-hidden="true"></i>
-			<i *ngIf="node.parent" (click)="addAfter()" class="fa fa-fw fa-long-arrow-down node-button" aria-hidden="true"></i>
-			<i *ngIf="node.parent" (click)="remove()" class="fa fa-fw fa-trash node-button" aria-hidden="true"></i>
+		</div>
+	</div>
+
+	<div *ngIf="isRoot() && show_buttons && !editing" class='left-node-buttons'>
+		<div class="node-buttons-block">
+			<i (click)="addLeft()" class="fa fa-fw fa-plus node-button" aria-hidden="true"></i>
+		</div>
+	</div>
+	<div *ngIf="isRoot() && show_buttons && !editing" class='right-node-buttons'>
+		<div class="node-buttons-block">
+			<i (click)="addRight()" class="fa fa-fw fa-plus node-button" aria-hidden="true"></i>
 		</div>
 	</div>
 </div>
-<div class="subnodes" >
-	<mind-map-node *ngFor="let subnode of node.subNodes" [node]="subnode"></mind-map-node>
+<div class="right-subnodes" >
+	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Right" [node]="subnode"></mind-map-node>
 </div>

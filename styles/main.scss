@@ -34,9 +34,16 @@ mind-map {
 	align-items: center;
 }
 
+.left-subnodes mind-map-node{
+	justify-content: flex-end;
+}
+
+.right-subnodes mind-map-node{
+	justify-content: flex-start;
+}
+
 mind-map-node {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	margin: 0 auto;
 
@@ -74,33 +81,59 @@ mind-map-node {
 			font-size: .75em;
 			text-align: center;
 
-			.node-buttons-block {
-				display: inline-block;
+		}
 
-				padding: {
-					top: .2em;
-    				bottom: .1em;
-    			}
+		.left-node-buttons {
+			position: absolute;
+			top: 0.5em;
+			left: -0.5em;
+			width: 100%;
 
-				background-color: white;
-				border: {
-					width: 1px;
-					style: solid;
-					color: black;
-					radius: 1em
-				}
+			font-size: .75em;
+			text-align: left;
 
-				.node-button {
-					cursor: pointer;
+		}
 
-					&:hover {
-						color: #71c1fd;
-					}
+		.right-node-buttons {
+			position: absolute;
+			top: 0.5em;
+			right: -0.5em;
+			width: 100%;
+
+			font-size: .75em;
+			text-align: right;
+
+		}
+
+		.node-buttons-block {
+			display: inline-block;
+
+			padding: {
+				top: .2em;
+				bottom: .1em;
+			}
+
+			background-color: white;
+			border: {
+				width: 1px;
+				style: solid;
+				color: black;
+				radius: 1em
+			}
+
+			.node-button {
+				cursor: pointer;
+
+				&:hover {
+					color: #71c1fd;
 				}
 			}
 		}
 	}
 
-	.subnodes {
+	.right-subnodes {
+	}
+
+	.left-subnodes {
 	}
 }

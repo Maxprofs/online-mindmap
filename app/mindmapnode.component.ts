@@ -1,4 +1,7 @@
 import { 
+	Pipe,
+	Injectable,
+	PipeTransform,
 	Component,
 	Directive, 
 	Input, 
@@ -7,7 +10,8 @@ import {
 	Renderer
 } from '@angular/core';
 
-import { MindMapNode } from './mindmapnode.class'
+import { MindMap } from './mindmap.class'
+import { MindMapNode, Side } from './mindmapnode.class'
 
 @Directive({
 	selector: 'mind-map-node input'
@@ -30,7 +34,9 @@ export class MindMapNodeComponent {
 	edited_text: string;
 	editing: boolean = false
 	show_buttons: boolean = false;
+	checkSide: any = Side;
 
+	
 	private updateText() {
 		if( this.editing ) {
 			this.node.text = this.edited_text;
@@ -40,21 +46,33 @@ export class MindMapNodeComponent {
 
 	add() {
 		if( this.node )
-			this.node.add( new MindMapNode("New Node") );
+			this.node.add( new MindMapNode("New Node",this.node.side) );
 	}
 
 	addBefore() {
-		if( this.node && this.node.parent )
+		if( this.node && !this.isRoot() )
 			this.node.parent.addBefore( this.node, new MindMapNode("New Node") );
 	}
 
 	addAfter() {
-		if( this.node && this.node.parent )
+		if( this.node && !this.isRoot() )
 			this.node.parent.addAfter( this.node, new MindMapNode("New Node") );
 	}
 
+
+	addLeft(): void {
+		if( this.node && this.isRoot() ) {
+			(this.node as MindMap).addLeft( new MindMapNode("New Node") );
+		}
+	}
+
+	addRight(): void {
+		if( this.node && this.isRoot() )
+			(this.node as MindMap).addRight( new MindMapNode("New Node") );
+	}
+
 	remove() {
-		if( this.node && this.node.parent )
+		if( this.node && !this.isRoot() )
 			this.node.parent.remove( this.node );
 	}
 
@@ -64,6 +82,10 @@ export class MindMapNodeComponent {
 
 	hideButtons() {
 		this.show_buttons = false;
+	}
+
+	isRoot(): boolean {
+		return !this.node.parent;
 	}
 
 	onInputClick() {
@@ -90,4 +112,15 @@ export class MindMapNodeComponent {
 	onInputEnter() {
 		this.updateText();
 	}
+}
+
+@Pipe({
+    name: 'sideFilter',
+    pure: false
+})
+@Injectable()
+export class SideFilterPipe implements PipeTransform {
+    transform(nodes: MindMapNode[], side: Side): any {
+        return nodes.filter(node => node.side == side);
+    }
 }
