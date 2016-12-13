@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { MindMap } from './mindmap.class'
-import { MindMapNode, Side } from './mindmapnode.class'
+import { MindMapNode, Side } from './mindmap-node.class'
 
 @Directive({
 	selector: 'mind-map-node input'
@@ -26,7 +26,7 @@ export class MindMapNodeInput {
 
 @Component({
 	selector: 'mind-map-node',
-	templateUrl: '/templates/mindmapnode.template.html'
+	templateUrl: '/templates/mindmap-node.template.html'
 })
 export class MindMapNodeComponent {
 	@Input() node: MindMapNode;
@@ -34,6 +34,7 @@ export class MindMapNodeComponent {
 	edited_text: string;
 	editing: boolean = false
 	show_buttons: boolean = false;
+//	show_buttons: boolean = true;
 	checkSide: any = Side;
 
 	

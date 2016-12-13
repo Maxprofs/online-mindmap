@@ -5,7 +5,7 @@ import { FormsModule }	 from '@angular/forms';
 import { OmmComponent }  from './omm.component';
 import { MainMenuComponent } from './main-menu.component';
 import { MindMapComponent }  from './mindmap.component';
-import { MindMapNodeComponent, MindMapNodeInput, SideFilterPipe }  from './mindmapnode.component';
+import { MindMapNodeComponent, MindMapNodeInput, SideFilterPipe }  from './mindmap-node.component';
 
 @NgModule({
 	imports: [

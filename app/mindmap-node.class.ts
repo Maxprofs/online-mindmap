@@ -42,6 +42,7 @@ export class MindMapNode {
 			if( node.id === this.subNodes[index].id ) {
 				this.subNodes.splice( Number(index)+1, 0, sibling );
 				sibling.parent = this;
+				sibling.side = node.side;
 				break;
 			}
 		}
@@ -52,6 +53,7 @@ export class MindMapNode {
 			if( node.id === this.subNodes[index].id ) {
 				this.subNodes.splice( Number(index), 0, sibling );
 				sibling.parent = this;
+				sibling.side = node.side;
 				break;
 			}
 		}

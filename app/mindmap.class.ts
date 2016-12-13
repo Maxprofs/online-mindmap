@@ -1,4 +1,4 @@
-import { MindMapNode, Side } from './mindmapnode.class';
+import { MindMapNode, Side } from './mindmap-node.class';
 
 export class MindMap extends MindMapNode {
 	constructor( id?:string ) {

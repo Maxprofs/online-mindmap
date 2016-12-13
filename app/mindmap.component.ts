@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 
 import { MindMapService } from './mindmap.service'
 import { MindMap } from './mindmap.class'
-import { MindMapNode } from './mindmapnode.class'
+import { MindMapNode } from './mindmap-node.class'
 
 @Component({
 	selector: 'mind-map',
