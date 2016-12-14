@@ -32,6 +32,7 @@ mind-map {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	position: relative;
 }
 
 .left-subnodes mind-map-node{
@@ -42,10 +43,20 @@ mind-map {
 	justify-content: flex-start;
 }
 
+mind-map-branch {
+	canvas {
+		background-color: black;
+		position: absolute;
+		min-height: .1em;
+		min-width: .1em;
+	}
+}
+
 mind-map-node {
 	display: flex;
 	align-items: center;
 	margin: 0 auto;
+	position: relative;
 
 	.node {
 		position: relative;

@@ -20,7 +20,7 @@ export class MindMapNode {
 	side: Side;
 
 	constructor( text: string, side?: Side, id?: string ) {
-		this.id = id ? id : Utils.newGuid();
+		this.id = id ? id : Utils.newId();
 		this.text = text ? text : "";
 		this.rel_x = 0;
 		this.rel_y = 0;

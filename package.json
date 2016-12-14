@@ -12,6 +12,7 @@
     "@angular/platform-browser-dynamic": "^2.2.4",
     "express": "^4.14.0",
     "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome.git",
+    "jquery": "^3.1.1",
     "reflect-metadata": "^0.1.8",
     "requirejs": "^2.3.2",
     "rxjs": "^5.0.0-rc.4",

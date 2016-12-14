@@ -65,6 +65,11 @@ module.exports = function(grunt) {
 		dest: 'static/styles/font-awesome.css'
 	}];
 
+	var jquery_files = [{
+		src: 'node_modules/jquery/dist/jquery.min.js',
+		dest: 'static/scripts/ext/jquery.js'
+	}];
+
 	grunt.initConfig({
 		exec: {
 			tsc: {
@@ -77,7 +82,8 @@ module.exports = function(grunt) {
 			css: { files: css_source_files },
 			app: { files: app_files	},
 			angular: { files: angular_files	},
-			fontawesome: {files: fontawesome_files }
+			fontawesome: {files: fontawesome_files },
+			jquery: {files: jquery_files}
 		},
 
 		clean: {
@@ -113,6 +119,7 @@ module.exports = function(grunt) {
 		'copy:app',
 		'copy:angular',
 		'copy:fontawesome',
+		'copy:jquery',
 		'clean:end'
 	]);
 
@@ -125,6 +132,7 @@ module.exports = function(grunt) {
 		'copy:app',
 		'copy:angular',
 		'copy:fontawesome',
+		'copy:jquery',
 		'clean:end'
 	]);
 };

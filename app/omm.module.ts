@@ -6,6 +6,7 @@ import { OmmComponent }  from './omm.component';
 import { MainMenuComponent } from './main-menu.component';
 import { MindMapComponent }  from './mindmap.component';
 import { MindMapNodeComponent, MindMapNodeInput, SideFilterPipe }  from './mindmap-node.component';
+import { MindMapBranchComponent } from './mindmap-branch.component';
 
 @NgModule({
 	imports: [
@@ -17,6 +18,7 @@ import { MindMapNodeComponent, MindMapNodeInput, SideFilterPipe }  from './mindm
 		MainMenuComponent,
 		MindMapComponent,
 		MindMapNodeComponent,
+		MindMapBranchComponent,
 		MindMapNodeInput,
 		SideFilterPipe
 	],

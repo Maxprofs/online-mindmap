@@ -37,7 +37,8 @@ export class MindMapNodeComponent {
 //	show_buttons: boolean = true;
 	checkSide: any = Side;
 
-	
+	constructor(public renderer: Renderer, public elementRef: ElementRef) {}
+
 	private updateText() {
 		if( this.editing ) {
 			this.node.text = this.edited_text;
