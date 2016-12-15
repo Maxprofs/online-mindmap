@@ -1,3 +1,5 @@
+/// <reference path="jquery.d.ts" />
+
 import { 
 	Component,
 	Input,
@@ -7,8 +9,7 @@ import {
 } from '@angular/core';
 
 import {MindMapNode} from './mindmap-node.class'
-
-declare var $: any;
+import {ElementSizes} from './element-sizes.class'
 
 @Component({
 	selector: 'mind-map-branch',
@@ -39,35 +40,19 @@ export class MindMapBranchComponent {
 		let node1_element = $(".node#" + this.node1.id);
 		let node2_element = $(".node#" + this.node2.id);
 
-		let position1 = node1_element.position();
-		let width1 = +node1_element.outerWidth(true);
-		let height1 = +node1_element.outerHeight(true);
+		let sizes1 = new ElementSizes(node1_element);
+		let sizes2 = new ElementSizes(node2_element,node1_element.offsetParent());
 
-		let position2: any = node2_element.position();
-		let width2 = +node2_element.outerWidth(true);
-		let height2 = +node2_element.outerHeight(true);
+		let l1 = sizes1.mediumLeft(false);
+		let r1 = sizes1.mediumRight(false);
 
-		let a1 = [position1.left,position1.top+(height1/2)];
-		let b1 = [position1.left+width1,position1.top+(height1/2)];
-
-		let node1_parent = node1_element.offsetParent();
-	
-		let np = node2_element.offsetParent();
-		while( np.get(0) != node1_parent.get(0) ) {
-			let p = np.position();
-			position2.top += p.top;
-			position2.left += p.left;
-
-			np =  np.offsetParent();
-		}
-
-		let a2 = [position2.left,position2.top+(height2/2)];
-		let b2 = [position2.left+width2,position2.top+(height2/2)];
+		let l2 = sizes2.mediumLeft(false);
+		let r2 = sizes2.mediumRight(false);;
 		
-		let toRight = b1[0] < b2[0];
-		this.canvas_width = toRight ? a2[0]-b1[0] : a1[0]-b2[0];
-		this.canvas_height = a1[1] > a2[1] ? a1[1]-a2[1] : a2[1]-a1[1];
-		this.canvas_top = a1[1] < a2[1] ? a1[1] : a2[1];
-		this.canvas_left = toRight ? b1[0] : b2[0];
+		let toRight = r1[0] < r2[0];
+		this.canvas_width = toRight ? l2[0]-r1[0] : l1[0]-r2[0];
+		this.canvas_height = l1[1] > l2[1] ? l1[1]-l2[1] : l2[1]-l1[1];
+		this.canvas_top = l1[1] < l2[1] ? l1[1] : l2[1];
+		this.canvas_left = toRight ? r1[0] : r2[0];
 	}
 }
