@@ -90,6 +90,14 @@ export class MindMapNodeComponent {
 		return !this.node.parent;
 	}
 
+	sideRight(): boolean {
+		return this.node.side == Side.None || this.node.side == Side.Right;
+	}
+
+	sideLeft(): boolean {
+		return this.node.side == Side.None || this.node.side == Side.Left;
+	}
+
 	onInputClick() {
 		if( this.node ) {
 			this.edited_text = this.node.text;
