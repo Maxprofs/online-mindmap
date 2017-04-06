@@ -16,7 +16,7 @@ $ npm install
 ```
 ## Build and run project
 ### Build with Grunt
-Grunt is used to build the project. It copies requiered external script, uglify project script, parse sass files, etc.
+Grunt is used to build the project. It copies requiered external script, parse sass files, etc.
 The project can be built in release or debug mode respectively with :
 ```
 $ grunt release
