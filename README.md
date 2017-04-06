@@ -14,13 +14,6 @@ Install Node.js dependencies with npm:
 ```
 $ npm install
 ```
-
-### Bower dependencies
-Install scripts dependencies declared with Bower:
-```
-$ bower install
-```
-
 ## Build and run project
 ### Build with Grunt
 Grunt is used to build the project. It copies requiered external script, uglify project script, parse sass files, etc.
