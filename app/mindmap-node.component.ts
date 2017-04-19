@@ -63,6 +63,23 @@ export class MindMapNodeComponent {
 		}
 	}
 
+	@HostListener('window:keyup.escape',['$event'])
+	escape(event: Event) {
+		if( this.editing ){
+			this.stopEdit();
+			event.stopImmediatePropagation();
+			return false;
+		}
+	}
+
+	onInputBlur() {
+		this.updateText();
+	}
+
+	onInputEnter() {
+		this.updateText();
+	}
+
 	onInputClick() {
 		this.mindMap.selectNode(this.node);
 		this.startEdit();
@@ -71,18 +88,18 @@ export class MindMapNodeComponent {
 	startEdit() {
 		if( this.node.selected ) {
 			this.edited_text = this.node.text;
-			this.editing = true;
+			this.setEditing(true);
 		}
 	}
 
 	stopEdit() {
-		this.editing = false;
+		this.setEditing(false);
 	}
 
 	updateText() {
 		if( this.editing ) {
 			this.node.text = this.edited_text;
-			this.editing = false;
+			this.setEditing(false);
 		}		
 	}
 
@@ -115,21 +132,36 @@ export class MindMapNodeComponent {
 		return this.node.side == Side.None || this.node.side == Side.Left;
 	}
 
-	@HostListener('window:keyup.escape',['$event'])
-	escape(event: Event) {
-		if( this.editing ){
-			this.stopEdit();
-			event.stopImmediatePropagation();
-			return false;
-		}
+	// Buttons actions
+
+	addBefore() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.addBeforeSelected();
 	}
 
-	onInputBlur() {
-		this.updateText();
+	addAfter() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.addAfterSelected();
 	}
 
-	onInputEnter() {
-		this.updateText();
+	remove() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.removeSelected();
+	}
+
+	add() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.addToSelected();
+	}
+
+	addLeft() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.addLeftSelected();
+	}
+
+	addRight() {
+		this.mindMap.selectNode(this.node);
+		this.mindMap.addRightSelected();
 	}
 }
 

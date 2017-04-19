@@ -161,7 +161,6 @@ export class MindMap extends MindMapNode {
 				this.selectedNode.add(new MindMapNode());
 	}
 
-
 	addBeforeSelected() {
 		if( this.selectedNode && !this.selected )
 			this.selectedNode.parent.addBefore( this.selectedNode, new MindMapNode() );
