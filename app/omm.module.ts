@@ -2,6 +2,8 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }	 from '@angular/forms';
 
+import { Modal } from './modal.component';
+
 import { OmmComponent }  from './omm.component';
 import { MainMenuComponent } from './main-menu.component';
 import { MindMapComponent }  from './mindmap.component';
@@ -13,7 +15,8 @@ import { MindMapBranchComponent, MindMapBranchCanvas } from './mindmap-branch.co
 		BrowserModule,
 		FormsModule
 	],
-	declarations: [ 
+	declarations: [
+		Modal,
 		OmmComponent,
 		MainMenuComponent,
 		MindMapComponent,

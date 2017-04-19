@@ -87,6 +87,7 @@ module.exports = function(grunt) {
 		},
 
 		clean: {
+			css: ['static/styles'],
 			init: ['static/scripts'],
 			end: ['app/**/*.js','app/**/*.js.map']
 		},
@@ -110,8 +111,16 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
+	grunt.registerTask('css',[
+		'clean:css',
+		'sass:all',
+		'copy:css',
+		'copy:fontawesome'
+	]);
+
 	grunt.registerTask('debug', [
 		'clean:init',
+		'clean:css',
 		'exec:tsc',
 		'sass:all',
 		'copy:scripts',
@@ -125,6 +134,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('release', [
 		'clean:init',
+		'clean:css',
 		'exec:tsc',
 		'sass:all',
 		'copy:scripts',

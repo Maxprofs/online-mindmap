@@ -4,78 +4,95 @@ import {
 	PipeTransform,
 	Component,
 	Directive, 
-	Input, 
+	Input,
+	Output,
 	HostListener, 
 	ElementRef, 
-	Renderer
+	Renderer,
+	EventEmitter
 } from '@angular/core';
 
 import { MindMap } from './mindmap.class'
 import { MindMapNode, Side } from './mindmap-node.class'
+import { MindMapService } from './mindmap.service'
 
 @Directive({
 	selector: 'mind-map-node input'
 })
 export class MindMapNodeInput {
-	constructor(public renderer: Renderer, public elementRef: ElementRef) {}
+	constructor(protected renderer: Renderer, protected elementRef: ElementRef) {}
 
 	ngOnInit() {
-    	this.renderer.invokeElementMethod(this.elementRef.nativeElement, 'focus', []);
+		let natElem = this.elementRef.nativeElement;
+
+    	this.renderer.invokeElementMethod(natElem, 'focus', []);
+    	setTimeout( () => this.renderer.invokeElementMethod(natElem, 'setSelectionRange', [0,natElem.value.length]), 10 );
   	}
 }
 
 @Component({
 	selector: 'mind-map-node',
-	templateUrl: '/templates/mindmap-node.template.html'
+	templateUrl: '/templates/mindmap-node.template.html',
+	host: {'[class.selected-node]':'node.selected'}
 })
 export class MindMapNodeComponent {
 	@Input() node: MindMapNode;
-	
-	edited_text: string;
-	editing: boolean = false
+	mindMap: MindMap;
+
+	@Output('editing')
+	editingEmitter: EventEmitter<boolean> = new EventEmitter();
+
+	edited_text: string = null;
+	editing: boolean = false;
+
 	show_buttons: boolean = false;
-//	show_buttons: boolean = true;
 	checkSide: any = Side;
 
-	constructor(public renderer: Renderer, public elementRef: ElementRef) {}
+	constructor( protected mindMapService: MindMapService ) {
+		this.mindMapService.getMindMap().then(mindMap => {this.mindMap = mindMap;});
+	}
 
-	private updateText() {
+	// EDITING TEXT
+
+	@HostListener('window:keyup.f2', ['$event'])
+	onF2( e: Event) {
+		if( !this.editing && this.node.selected ) {
+			this.startEdit();
+			e.stopImmediatePropagation();
+			return false;
+		}
+	}
+
+	onInputClick() {
+		this.mindMap.selectNode(this.node);
+		this.startEdit();
+	}
+
+	startEdit() {
+		if( this.node.selected ) {
+			this.edited_text = this.node.text;
+			this.editing = true;
+		}
+	}
+
+	stopEdit() {
+		this.editing = false;
+	}
+
+	updateText() {
 		if( this.editing ) {
 			this.node.text = this.edited_text;
 			this.editing = false;
 		}		
 	}
 
-	add() {
-		if( this.node )
-			this.node.add( new MindMapNode("New Node",this.node.side) );
+	setEditing( ed: boolean ){
+		this.editing = ed;
+		this.onEditing(ed);
 	}
 
-	addBefore() {
-		if( this.node && !this.isRoot() )
-			this.node.parent.addBefore( this.node, new MindMapNode("New Node") );
-	}
-
-	addAfter() {
-		if( this.node && !this.isRoot() )
-			this.node.parent.addAfter( this.node, new MindMapNode("New Node") );
-	}
-
-
-	addLeft(): void {
-		if( this.node && this.isRoot() ) {
-			(this.node as MindMap).addLeft( new MindMapNode("New Node") );
-		}
-	}
-
-	addRight(): void {
-		if( this.node && this.isRoot() )
-			(this.node as MindMap).addRight( new MindMapNode("New Node") );
-	}
-
-	remove() {
-		if( this.node && !this.isRoot() )
-			this.node.parent.remove( this.node );
+	onEditing( ed: boolean ){
+		this.editingEmitter.emit(ed);	
 	}
 
 	showButtons() {
@@ -98,21 +115,13 @@ export class MindMapNodeComponent {
 		return this.node.side == Side.None || this.node.side == Side.Left;
 	}
 
-	onInputClick() {
-		if( this.node ) {
-			this.edited_text = this.node.text;
-			this.editing = true;
+	@HostListener('window:keyup.escape',['$event'])
+	escape(event: Event) {
+		if( this.editing ){
+			this.stopEdit();
+			event.stopImmediatePropagation();
+			return false;
 		}
-	}
-
-	@HostListener('keyup.up')
-	onKeyUp() {
-		this.addBefore();
-	}
-
-	@HostListener('keyup.down')
-	onKeyDown() {
-		this.addAfter()
 	}
 
 	onInputBlur() {

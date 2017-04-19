@@ -1,1 +1,6 @@
-<mind-map-node *ngIf="mindMap" [(node)]="mindMap" class="root"></mind-map-node>
+<mind-map-node *ngIf="mindMap" [(node)]="mindMap" class="root" (editing)="onEditing($event)"></mind-map-node>
+
+<modal>
+	<div class="modal-title">Selecciona un icono."</div>
+	<div class="modal-content"></div>
+</modal>

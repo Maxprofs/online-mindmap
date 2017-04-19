@@ -1,5 +1,5 @@
 <div *ngIf="sideLeft()" class="left-subnodes" >
-	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Left" [node]="subnode"></mind-map-node>
+	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Left" [node]="subnode" (editing)="onEditing($event)"></mind-map-node>
 	<mind-map-branch *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Left" [node1] ="node" [node2]="subnode" ></mind-map-branch>
 </div>
 <div class="node" id="{{node.id}}" (mouseover)="showButtons()" (mouseleave)="hideButtons()" >
@@ -36,6 +36,6 @@
 	</div>
 </div>
 <div *ngIf="sideRight()" class="right-subnodes" >
-	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Right" [node]="subnode"></mind-map-node>
+	<mind-map-node *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Right" [node]="subnode" (editing)="onEditing($event)"></mind-map-node>
 	<mind-map-branch *ngFor="let subnode of node.subNodes | sideFilter: checkSide.Right" [node1] ="node" [node2]="subnode" ></mind-map-branch>
 </div>

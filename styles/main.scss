@@ -14,14 +14,27 @@ main-menu {
 	background-color: #71c1fd;
 
 	#menu-head {
+		font-size: 1.5em;
+
 		h1 {
 			margin-right: 0.5em;
 		}
 
+		justify-content: space-between;
 		display: flex;
 		flex-direction: row;
 		white-space: nowrap;
 		padding: 0.5em;
+	}
+
+	#menu-options {
+		ul {
+			li {
+				.fa-li {
+					top: 0;
+				}
+			}
+		}
 	}
 }
 
@@ -54,7 +67,7 @@ mind-map-branch {
 mind-map-node {
 	display: flex;
 	align-items: center;
-	margin: 0 auto;
+	margin: auto;
 	position: relative;
 
 	.node {
@@ -76,10 +89,17 @@ mind-map-node {
 			color: black;
 			radius: 1em;
 		}
+		.node-content {
+			min-width: 4em;
 
-		.node-text {
-			margin-left: 0.5em;
-			margin-right: 0.5em;
+			.node-text {
+				margin-left: 0.5em;
+				margin-right: 0.5em;
+			}
+
+			input {
+				width: 100%;
+			}
 		}
 
 		.node-buttons {
@@ -135,6 +155,16 @@ mind-map-node {
 				&:hover {
 					color: #71c1fd;
 				}
+			}
+		}
+
+	}
+
+	&.selected-node {
+		> .node {
+			background-color: #71c1fd;
+			.node-buttons-block {
+				background-color: #71c1fd;
 			}
 		}
 	}

@@ -83,8 +83,8 @@ export class MindMapBranchComponent {
 	
 		let w = this.canvas_width;
 		let h = this.canvas_height;
-		let cw = canvas.width = w;
-		let ch = canvas.height = h;
+		canvas.width = w;
+		canvas.height = h;
 
 		context.clearRect(0, 0, this.canvas_width, this.canvas_height);
 	

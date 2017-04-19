@@ -4,7 +4,13 @@ import { MindMap } from './mindmap.class';
 
 @Injectable()
 export class MindMapService {
+
+	mindMap: MindMap;
+
 	getMindMap(): Promise<MindMap> {
-		return Promise.resolve(new MindMap());
+		if( !this.mindMap )
+			this.mindMap = new MindMap();
+
+		return Promise.resolve(this.mindMap);
 	};
 }

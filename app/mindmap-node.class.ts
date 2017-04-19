@@ -11,30 +11,33 @@ export enum Side {
 export class MindMapNode {
 	id: string;
 	text: string;
-	icon: string;
-	rel_x: number;
-	rel_y: number;
-	style: any;
+	selected: boolean;
 	parent: MindMapNode;
 	subNodes: MindMapNode[];
 	side: Side;
 
-	constructor( text: string, side?: Side, id?: string ) {
-		this.id = id ? id : Utils.newId();
-		this.text = text ? text : "";
+	icon: string;
+	rel_x: number;
+	rel_y: number;
+	style: any;
+
+	constructor() {
+		this.id = Utils.newId();
+		this.text = "New Node";
 		this.rel_x = 0;
 		this.rel_y = 0;
 		this.style = DEFAULT_STYLE;
 		this.subNodes = [];
 		this.parent = null;
-		this.side = side ? side : Side.None; 
-
+		this.side = Side.None; 
+		this.selected = false;
 	}
 
 	add ( node: MindMapNode,  ): void {
 		this.subNodes.push(node);
 		node.parent = this;
 		node.side = this.side;
+		this.selectNode(node);
 	}
 
 	addAfter( node: MindMapNode, sibling: MindMapNode ): void {
@@ -43,6 +46,7 @@ export class MindMapNode {
 				this.subNodes.splice( Number(index)+1, 0, sibling );
 				sibling.parent = this;
 				sibling.side = node.side;
+				this.selectNode(sibling);
 				break;
 			}
 		}
@@ -54,6 +58,7 @@ export class MindMapNode {
 				this.subNodes.splice( Number(index), 0, sibling );
 				sibling.parent = this;
 				sibling.side = node.side;
+				this.selectNode(sibling);
 				break;
 			}
 		}
@@ -63,9 +68,14 @@ export class MindMapNode {
 		for( let index in this.subNodes ) {
 			if( node.id === this.subNodes[index].id ) {
 				this.subNodes.splice( Number(index), 1 );
+				this.selectNode(this);
 				break;
 			}
 		}
+	}
+
+	selectNode (node: MindMapNode) {
+		this.parent.selectNode(node);
 	}
 
 	left():boolean {
