@@ -1,3 +1,5 @@
+$default_bg_color: #71c1fd;
+
 html, body {
 	height: 100%;
 	font-family: Helvetica;
@@ -11,7 +13,7 @@ omm {
 }
 
 main-menu {
-	background-color: #71c1fd;
+	background-color: $default_bg_color;
 
 	#menu-head {
 		font-size: 1.5em;
@@ -48,12 +50,24 @@ mind-map {
 	position: relative;
 }
 
-.left-subnodes mind-map-node{
-	justify-content: flex-end;
+.left-subnodes {
+	flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+
+	mind-map-node {
+		justify-content: flex-end;
+	}
 }
 
-.right-subnodes mind-map-node{
-	justify-content: flex-start;
+.right-subnodes {
+	flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+	
+	mind-map-node {
+		justify-content: flex-start;
+	}
 }
 
 mind-map-branch {
@@ -67,8 +81,13 @@ mind-map-branch {
 mind-map-node {
 	display: flex;
 	align-items: center;
-	margin: auto;
 	position: relative;
+	margin: auto 0;
+	flex-shrink: 0;
+
+	&.root {
+		margin: auto;
+	}
 
 	.node {
 		position: relative;
@@ -77,10 +96,6 @@ mind-map-node {
 		margin: 0.75em;
 		
 		flex-shrink: 0;
-
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
 
 		background-color: white;
 		border: {
@@ -153,7 +168,7 @@ mind-map-node {
 				cursor: pointer;
 
 				&:hover {
-					color: #71c1fd;
+					color: $default_bg_color;
 				}
 			}
 		}
@@ -162,9 +177,13 @@ mind-map-node {
 
 	&.selected-node {
 		> .node {
-			background-color: #71c1fd;
+			background-color: $default_bg_color;
 			.node-buttons-block {
-				background-color: #71c1fd;
+				background-color: $default_bg_color;
+
+				.node-button:hover {
+					color: white;
+				}
 			}
 		}
 	}
