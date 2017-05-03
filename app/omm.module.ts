@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }	 from '@angular/forms';
 
-import { Modal } from './modal.component';
+import { Modal } from './utils/modal.component';
 
 import { OmmComponent }  from './omm.component';
 import { MainMenuComponent } from './main-menu.component';

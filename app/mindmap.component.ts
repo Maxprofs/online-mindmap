@@ -1,8 +1,8 @@
 import { Component, HostListener, ContentChildren } from '@angular/core';
 
-import { MindMapService } from './mindmap.service'
-import { MindMap } from './mindmap.class'
-import { MindMapNode } from './mindmap-node.class'
+import { MindMapService } from './services/mindmap.service'
+import { MindMap } from './model/mindmap.class'
+import { MindMapNode } from './model/mindmap-node.class'
 import { MindMapNodeComponent } from './mindmap-node.component'
 
 @Component({

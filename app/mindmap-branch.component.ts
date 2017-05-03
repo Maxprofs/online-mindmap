@@ -1,4 +1,4 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="utils/jquery.d.ts" />
 
 import { 
 	Component,
@@ -10,8 +10,8 @@ import {
 	Directive
 } from '@angular/core';
 
-import {MindMapNode, Side} from './mindmap-node.class'
-import {ElementSizes} from './element-sizes.class'
+import {MindMapNode, Side} from './model/mindmap-node.class'
+import {ElementSizes} from './model/element-sizes.class'
 
 @Directive({
 	selector: 'mind-map-branch canvas'

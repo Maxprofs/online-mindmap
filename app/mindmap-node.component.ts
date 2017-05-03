@@ -12,9 +12,9 @@ import {
 	EventEmitter
 } from '@angular/core';
 
-import { MindMap } from './mindmap.class'
-import { MindMapNode, Side } from './mindmap-node.class'
-import { MindMapService } from './mindmap.service'
+import { MindMap } from './model/mindmap.class'
+import { MindMapNode, Side } from './model/mindmap-node.class'
+import { MindMapService } from './services/mindmap.service'
 
 @Directive({
 	selector: 'mind-map-node input'

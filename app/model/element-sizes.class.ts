@@ -1,6 +1,6 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="../utils/jquery.d.ts" />
 
-import {Error} from './utils.class'
+import {Error} from '../utils/utils.class'
 
 export class ElementSizes {
 	public position: [number,number];

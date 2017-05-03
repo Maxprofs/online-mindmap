@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { MindMap } from './mindmap.class';
+import { MindMap } from '../model/mindmap.class';
 
 @Injectable()
 export class MindMapService {

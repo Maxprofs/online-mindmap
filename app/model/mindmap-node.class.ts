@@ -1,4 +1,4 @@
-import { Utils } from './utils.class';
+import { Utils } from '../utils/utils.class';
 
 export const DEFAULT_STYLE = {};
 
