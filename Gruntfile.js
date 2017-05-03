@@ -76,6 +76,13 @@ module.exports = function(grunt) {
 				cmd: "tsc"
 			}
 		},
+
+		uglify: {
+			app: {
+				options: {},
+				files: app_files
+			}
+		},
 		
 		copy: {
 			scripts: { files: scripts_files },
@@ -110,6 +117,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	grunt.registerTask('css',[
 		'clean:css',
@@ -139,7 +147,7 @@ module.exports = function(grunt) {
 		'sass:all',
 		'copy:scripts',
 		'copy:css',
-		'copy:app',
+		'uglify:app',
 		'copy:angular',
 		'copy:fontawesome',
 		'copy:jquery',
