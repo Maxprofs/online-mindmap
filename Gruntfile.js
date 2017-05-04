@@ -2,9 +2,8 @@ module.exports = function(grunt) {
 
 	var app_files = [{
 		expand: true,
-		flatten: true,
 		src: ['app/**/*.js'],
-		dest: 'static/scripts/app/'
+		dest: 'static/scripts/'
 	}];
 
 	var scripts_files = [{

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { MindMapRef, MindMapService } from './services/mindmap.service'
+
 export class Side {
 	id: number;
 	name: string;
@@ -16,8 +18,13 @@ const SIDES: Side[] = [
   selector: 'main-menu',
   templateUrl: '/templates/main-menu.template.html'
 })
-
 export class MainMenuComponent  {
+
+	constructor( private mindMapService: MindMapService ) {
+		mindMapService.getMindMapsListObservable().subscribe((list)=>this.mapsList = list)
+	}
+
+	mapsList: MindMapRef[];
 	side: Side = SIDES[0];
 	open: boolean = false;
 
@@ -31,5 +38,13 @@ export class MainMenuComponent  {
 
 	switchMenu(): void {
 		this.open = !this.open;
+	}
+
+	load( id: string ) {
+		this.mindMapService.loadMindMap( id );
+	}
+
+	save() {
+		this.mindMapService.saveMindMap();
 	}
 }

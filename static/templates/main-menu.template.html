@@ -8,5 +8,12 @@
 		<li><i class="fa-li fa fa-edit"></i>Editar (F2)</li>
 		<li><i class="fa-li fa fa-trash"></i>Eliminar (Supr)</li>
 		<li><i class="fa-li fa fa-smile-o"></i>Seleccionar icono</li>
+		<li (click)="save()"><i class="fa-li fa fa-save"></i>Guargar Mapa</li>
+	</ul>
+	<h1>Cargar</h1>
+	<ul class="fa-ul">
+		<li *ngFor="let mapRef of mapsList" (click)="load(mapRef.id)">
+			<i class="fa-rotate-270 fa-li fa fa-sitemap" ></i>{{mapRef.name}}
+		</li>
 	</ul>
 </div>

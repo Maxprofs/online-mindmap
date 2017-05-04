@@ -4,6 +4,9 @@ import { FormsModule }	 from '@angular/forms';
 
 import { Modal } from './utils/modal.component';
 
+import { WindowRef } from './services/windowref.service';
+import { MindMapService } from './services/mindmap.service';
+
 import { OmmComponent }  from './omm.component';
 import { MainMenuComponent } from './main-menu.component';
 import { MindMapComponent }  from './mindmap.component';
@@ -26,8 +29,10 @@ import { MindMapBranchComponent, MindMapBranchCanvas } from './mindmap-branch.co
 		SideFilterPipe,
 		MindMapBranchCanvas
 	],
-//	providers: [
-//	],
+	providers: [
+		WindowRef,
+		MindMapService
+	],
 	bootstrap: [
 		OmmComponent
 	]

@@ -1,4 +1,4 @@
-import { Component, HostListener, ContentChildren } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 import { MindMapService } from './services/mindmap.service'
 import { MindMap } from './model/mindmap.class'
@@ -7,20 +7,20 @@ import { MindMapNodeComponent } from './mindmap-node.component'
 
 @Component({
 	selector: 'mind-map',
-	providers: [MindMapService],
 	templateUrl: '/templates/mindmap.template.html'
 })
 export class MindMapComponent {
-	
+
 	mindMap: MindMap;
 	editing: boolean = false;
 
 	constructor( private mindMapService: MindMapService ) {};
 
 	ngOnInit(): void {
-		this.mindMapService.getMindMap().then( mindMap => { 
-			this.mindMap = mindMap; 
-		} );
+		this.mindMapService.getMindMapObservable().subscribe( mindMap => { 
+			this.mindMap = mindMap;
+			this.editing = false;
+		});
 	}
 
 	onEditing( ed: boolean ){

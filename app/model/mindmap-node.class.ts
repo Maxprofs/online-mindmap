@@ -21,15 +21,27 @@ export class MindMapNode {
 	rel_y: number;
 	style: any;
 
-	constructor() {
-		this.id = Utils.newId();
-		this.text = "New Node";
-		this.rel_x = 0;
-		this.rel_y = 0;
-		this.style = DEFAULT_STYLE;
-		this.subNodes = [];
-		this.parent = null;
-		this.side = Side.None; 
+	constructor( obj?: any ) {
+		if( obj ) {
+			Object.assign(this,obj);
+			if( this.subNodes ) {
+				for( let i in this.subNodes ) {
+					this.subNodes[i] = new MindMapNode( this.subNodes[i] );
+					this.subNodes[i].parent = this;
+				}
+			}
+		}
+		else {
+			this.id = Utils.newId();
+			this.text = "New Node";
+			this.rel_x = 0;
+			this.rel_y = 0;
+			this.style = DEFAULT_STYLE;
+			this.subNodes = [];
+			this.parent = null;
+			this.side = Side.None; 
+		}
+
 		this.selected = false;
 	}
 

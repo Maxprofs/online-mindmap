@@ -3,10 +3,12 @@ import { MindMapNode, Side } from './mindmap-node.class';
 export class MindMap extends MindMapNode {
 	public selectedNode: MindMapNode;
 
-	constructor() {
-		super();
-		this.text = "New Mind Map";
-		this.side = Side.None;
+	constructor( obj?: any ) {
+		super( obj );
+		if( !obj ) {
+			this.text = "New Mind Map";
+			this.side = Side.None;
+		};
 		this.selectedNode = this;
 		this.selected = true;
 	}

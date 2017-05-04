@@ -9,12 +9,16 @@ import {
 	HostListener, 
 	ElementRef, 
 	Renderer,
-	EventEmitter
+	EventEmitter,
+	ViewChildren,
+	QueryList
 } from '@angular/core';
 
 import { MindMap } from './model/mindmap.class'
 import { MindMapNode, Side } from './model/mindmap-node.class'
 import { MindMapService } from './services/mindmap.service'
+
+import { MindMapBranchComponent } from './mindmap-branch.component'
 
 @Directive({
 	selector: 'mind-map-node input'
@@ -42,6 +46,8 @@ export class MindMapNodeComponent {
 	@Output('editing')
 	editingEmitter: EventEmitter<boolean> = new EventEmitter();
 
+	@ViewChildren(MindMapBranchComponent) branches: QueryList<MindMapBranchComponent>;
+	
 	edited_text: string = null;
 	editing: boolean = false;
 
@@ -49,7 +55,11 @@ export class MindMapNodeComponent {
 	checkSide: any = Side;
 
 	constructor( protected mindMapService: MindMapService ) {
-		this.mindMapService.getMindMap().then(mindMap => {this.mindMap = mindMap;});
+		this.mindMapService.getMindMapObservable().subscribe(mindMap => {this.mindMap = mindMap;});
+	}
+
+	ngAfterViewChecked() {
+		this.branches.forEach((item)=>item.update());
 	}
 
 	// EDITING TEXT
@@ -80,9 +90,11 @@ export class MindMapNodeComponent {
 		this.updateText();
 	}
 
-	onInputClick() {
-		this.mindMap.selectNode(this.node);
-		this.startEdit();
+	onContentClick() {
+		if( !this.node.selected )
+			this.mindMap.selectNode(this.node);
+		else
+			this.startEdit();
 	}
 
 	startEdit() {
